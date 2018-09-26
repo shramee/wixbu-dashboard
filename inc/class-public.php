@@ -65,7 +65,6 @@ class Wixbu_Dash_Public{
 		return 'edit-account';
 	}
 
-
 	/**
 	 * Outputs opening tag for .wixbu-dash-content-wrap
 	 * @action lifterlms_before_student_dashboard_content 25

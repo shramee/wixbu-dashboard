@@ -5,66 +5,96 @@
  * @version 1.0.0
  */
 
-nav.llms-sd-nav {
-	border-bottom: 1px solid #ccc;
+.llms-student-dashboard {
+	display: flex;
+	align-items: stretch;
+	border: 1px solid #ccc;
+}
+
+header.llms-sd-header {
 	overflow: hidden;
 	width: 300px;
 	padding: 0;
 	float: left;
-	background: #ffffff;
-	border-bottom: 1px solid #aaa;
-
-	* {
-		box-sizing: border-box;
-	}
-
-	.llms-sep {
-		display: none;
-	}
-
-	ul li.llms-sd-item {
-		&, a {
-			display: block;
-			width: 100%;
-		}
-		a {
-			color: #444 !important;
-			display: block;
-			padding: 8px 20px;
-			text-decoration: none;
-			border-top: 1px solid #aaa;
-			border-radius: 0;
-		}
-		&.current a {
-			background: #eee;
-		}
-	}
+	border-right: 1px solid #ccc;
+	display: flex;
+	align-items: center;
 }
 
-.llms-sd-section-title,
-.llms-sd-title {
+nav.wixbu-dashboard-l2-tabs {
+	display: flex;
+	float: right;
+	margin-bottom: 1.6em;
+}
+
+nav.wixbu-dashboard-l2-tabs a,
+header.llms-sd-header a {
+	//font-weight: 300;
+	font-size: 18px;
+	color: #444 !important;
+	display: block;
+	padding: 34px;
+	text-decoration: none;
+	border-radius: 0;
+	text-align: center;
+}
+
+nav.wixbu-dashboard-l2-tabs a {
+	padding: 16px 34px;
+	margin: 12px 0 0 12px;
+}
+
+nav.wixbu-dashboard-l2-tabs a.wixbu-dashboard-l2-tab-active {
+	background: #f5f5f5;
+	border: 1px solid #ddd;
+}
+
+nav.llms-sd-nav * {
+	box-sizing: border-box;
+}
+
+nav.llms-sd-nav .llms-sep {
+	display: none;
+}
+
+nav.llms-sd-nav li,
+nav.llms-sd-nav li a {
+	display: block;
+	width: 100%;
+}
+
+nav.llms-sd-nav ul li.llms-sd-item.edit-address:not(.current),
+nav.llms-sd-nav ul li.current + .edit-account {
+	display: none;
+}
+
+nav.llms-sd-nav ul li.llms-sd-item.current a {
+	background: #eee;
+}
+
+.llms-sd-section-title, .llms-sd-title {
 	display: none;
 }
 
 .wixbu-dash-content-wrap {
 	padding: 16px 25px 7px;
 	background: #fff;
-	float: right;
 	width: calc( 100% - 320px );
-	&, * {
-		box-sizing: border-box;
-	}
-	a.delete-account {
-		color: #bb0000;
-		padding-top: 34px;
-		display: block;
-		text-align: right;
-	}
-	a.llms-button-action {
-		&, &:visited {
-			color: inherit;
-		}
-	}
+}
+
+.wixbu-dash-content-wrap, .wixbu-dash-content-wrap * {
+	box-sizing: border-box;
+}
+
+.wixbu-dash-content-wrap a.delete-account {
+	color: #bb0000;
+	padding-top: 34px;
+	display: block;
+	text-align: right;
+}
+
+.wixbu-dash-content-wrap a.llms-button-action, .wixbu-dash-content-wrap a.llms-button-action:visited {
+	color: inherit;
 }
 
 .wixbu-dash-content-wrap form {
@@ -75,47 +105,54 @@ nav.llms-sd-nav {
 	padding: 5px 16px;
 	box-sizing: border-box;
 	color: #555;
-	select {
-		-webkit-appearance: none;
-	}
+}
 
-	input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"],
-	.llms-button-action, .llms-button-danger, .llms-button-primary, .llms-button-secondary,
-	input[type="tel"], input[type="number"], textarea, select {
-		border: 2px solid;
-		font: inherit;
-		background: #ffffff;
-		color: inherit;
-		border-radius: 7px;
-		margin: 16px 0 20px;
-		width: 100%;
-		display: block;
-		padding: 7px 11px;
-	}
-	.llms-button-action, .llms-button-danger, .llms-button-primary, .llms-button-secondary {
-		text-align: center;
-		text-transform: uppercase;
-		&:hover {
-			color: inherit;
-		}
-	}
+.llms-form-field label {
+	font-weight: 300;
+}
+
+.llms-form-field select {
+	-webkit-appearance: none;
+}
+
+.llms-form-field input[type="text"], .llms-form-field input[type="email"], .llms-form-field input[type="url"], .llms-form-field input[type="password"], .llms-form-field input[type="search"], .llms-form-field .llms-button-action, .llms-form-field .llms-button-danger, .llms-form-field .llms-button-primary, .llms-form-field .llms-button-secondary, .llms-form-field input[type="tel"], .llms-form-field input[type="number"], .llms-form-field textarea, .llms-form-field select {
+	border: 2px solid;
+	font: inherit;
+	background: #ffffff;
+	color: inherit;
+	border-radius: 7px;
+	margin: 16px 0 20px;
+	width: 100%;
+	display: block;
+	padding: 7px 11px;
+}
+
+.llms-form-field .llms-button-action, .llms-form-field .llms-button-danger, .llms-form-field .llms-button-primary, .llms-form-field .llms-button-secondary {
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.llms-form-field .llms-button-action:hover, .llms-form-field .llms-button-danger:hover, .llms-form-field .llms-button-primary:hover, .llms-form-field .llms-button-secondary:hover {
+	color: inherit;
 }
 
 .llms-form-heading {
 	padding: 0 25px 10px;
 }
 
-.llms-my-courses {
-	.llms-loop-link .llms-loop-item-footer {
-		display: none;
-	}
-	.llms-loop-list.cols-3 .llms-loop-item {
-		width: 100%;
-	}
+.llms-my-courses .llms-loop-link .llms-loop-item-footer {
+	display: none;
 }
 
-@media (min-width: 850px){
+.llms-my-courses .llms-loop-list.cols-3 .llms-loop-item {
+	width: 100%;
+}
+
+@media (min-width: 850px) {
 	.llms-my-courses .llms-loop-list.cols-3 .llms-loop-item {
 		width: 50%;
 	}
 }
+
+
+header.llms-sd-header {}
