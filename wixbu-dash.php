@@ -42,6 +42,12 @@ class Wixbu_Dash{
 	/** @var string Plugin directory path */
 	public static $path;
 
+	/** @var array Dashboard tabs */
+	public static $tabs;
+
+	/** @var string Account page URL */
+	public static $ac_page_url;
+
 	/** @var Wixbu_Dash_Admin Instance */
 	public $admin;
 
@@ -99,7 +105,7 @@ class Wixbu_Dash{
 
 		//Enqueue front end JS and CSS
 		add_action( 'wp_enqueue_scripts',	array( $this->public, 'enqueue' ) );
-		add_filter( 'llms_get_student_dashboard_tabs',	array( $this->public, 'llms_get_student_dashboard_tabs' ) );
+		add_filter( 'llms_get_student_dashboard_tabs',	array( $this->public, 'llms_get_student_dashboard_tabs' ), 9 );
 		add_filter( 'llms_student_dashboard_default_tab',	array( $this->public, 'llms_student_dashboard_default_tab' ) );
 		add_filter( 'lifterlms_before_student_dashboard_content',	array( $this->public, 'lifterlms_before_student_dashboard_content' ), 25 );
 		add_filter( 'lifterlms_after_student_dashboard',	array( $this->public, 'lifterlms_after_student_dashboard' ), 5 );

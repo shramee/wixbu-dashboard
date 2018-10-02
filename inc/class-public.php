@@ -56,6 +56,36 @@ class Wixbu_Dash_Public{
 	}
 
 	/**
+	 * @param array $tabs Tabs data
+	 * @param bool $echo
+	 * @return string Tabs html
+	 */
+	public static function second_level_tabs( $tabs, $echo = true ) {
+		$out = '<nav class="wixbu-dashboard-l2-tabs">';
+		foreach ( $tabs as $url => $tab ) {
+			$class = 'wixbu-dashboard-l2-tab';
+			if ( 0 === strpos( $url, '?' ) ) {
+				$qry = explode( '=', trim( $url, '?' ) );
+				if ( ! empty( $_GET[ $qry[0] ] ) && $_GET[ $qry[0] ] == $qry[1] ) {
+					$class .= ' wixbu-dashboard-l2-tab-active';
+				}
+			} else if ( ! empty( Wixbu_Dash::$tabs[ $url ]['endpoint'] ) ) {
+				$endpoint = Wixbu_Dash::$tabs[ $url ]['endpoint'];
+				$url = Wixbu_Dash::$ac_page_url . $endpoint;
+				if ( strpos( $_SERVER['REQUEST_URI'], $endpoint ) ) {
+					$class .= ' wixbu-dashboard-l2-tab-active';
+				}
+			}
+			$out .= "<a class='$class' href='$url'>$tab</a>";
+		}
+		$out .= '</nav><div class="clear"></div>';
+		if ( $echo ) {
+			echo $out;
+		}
+		return $out;
+	}
+
+	/**
 	 * Set default tab
 	 * @param string $tab Default tab
 	 * @filter llms_student_dashboard_default_tab
@@ -157,28 +187,32 @@ class Wixbu_Dash_Public{
 	public function llms_get_student_dashboard_tabs( $tbs ) {
 		$tabs = [];
 
-		//My Courses
-//		$tabs['view-courses'] = $tbs['view-courses'];
-
-		//Notifications
-//		$tabs['notifications'] = $tbs['notifications'];
-
-		//My achievements
-//		$tabs['view-achievements'] = $tbs['view-achievements'];
-
-		//Edit Account
-		$tabs['edit-account'] = $tbs['edit-account'];
-
-		//Address
 		$tabs['edit-address'] = [
 			'content' => function() {
+				$ac_url = untrailingslashit( llms_get_page_url( 'myaccount' ) );
+				Wixbu_Instructors_Public::second_level_tabs( [
+					'edit-account' => __( 'Credentials', 'lifterlms' ),
+					'edit-address' => __( 'Edit Address', 'lifterlms' ),
+				] );
 				echo '<div class="llms-personal-form edit-address">';
-					LLMS_Student_Dashboard::output_edit_account_content();
+				LLMS_Student_Dashboard::output_edit_account_content();
 				echo '</div>';
 			},
 			'endpoint' => 'edit-address',
-			'title' => __( 'Edit' ) . ' ' . __( 'Address', 'lifterlms' ),
+			'title' => __( 'Edit account', 'lifterlms' ),
 		];
+
+		$tabs['edit-account'] = $tbs['edit-account'];
+
+		$tabs['edit-account']['content'] = function() {
+			Wixbu_Instructors_Public::second_level_tabs( [
+				'edit-account' => __( 'Credentials', 'lifterlms' ),
+				'edit-address' => __( 'Edit Address', 'lifterlms' ),
+			] );
+			echo '<div class="llms-personal-form edit-credentials">';
+			LLMS_Student_Dashboard::output_edit_account_content();
+			echo '</div>';
+		};
 
 		//Membership
 		$tabs['membership'] = [
@@ -189,6 +223,9 @@ class Wixbu_Dash_Public{
 
 		//Orders history
 		$tabs['orders'] = $tbs['orders'];
+
+		Wixbu_Dash::$ac_page_url = trailingslashit( llms_get_page_url( 'myaccount' ) );
+		Wixbu_Dash::$tabs = $tabs;
 
 		return $tabs;
 	}
