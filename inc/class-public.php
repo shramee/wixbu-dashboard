@@ -3,7 +3,7 @@
 /**
  * Wixbu dashboard public class
  */
-class Wixbu_Dash_Public{
+class Wixbu_Dash_Public {
 
 	/** @var Wixbu_Dash_Public Instance */
 	private static $_instance = null;
@@ -190,7 +190,7 @@ class Wixbu_Dash_Public{
 		$tabs['edit-address'] = [
 			'content' => function() {
 				$ac_url = untrailingslashit( llms_get_page_url( 'myaccount' ) );
-				Wixbu_Instructors_Public::second_level_tabs( [
+				Wixbu_Dash_Public::second_level_tabs( [
 					'edit-account' => __( 'Credentials', 'lifterlms' ),
 					'edit-address' => __( 'Edit Address', 'lifterlms' ),
 				] );
@@ -205,7 +205,7 @@ class Wixbu_Dash_Public{
 		$tabs['edit-account'] = $tbs['edit-account'];
 
 		$tabs['edit-account']['content'] = function() {
-			Wixbu_Instructors_Public::second_level_tabs( [
+			Wixbu_Dash_Public::second_level_tabs( [
 				'edit-account' => __( 'Credentials', 'lifterlms' ),
 				'edit-address' => __( 'Edit Address', 'lifterlms' ),
 			] );
